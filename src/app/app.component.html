@@ -6,14 +6,14 @@
 <section class="d-flex justify-content-center align-items-center">
   <form
     class="row align-items-center"
-    style="width: 50%"
+    style="width: 90%"
     #f="ngForm"
     (submit)="onSubmit()"
   >
     <div class="col-3">
       <label for="income">Yearly Income</label>
     </div>
-    <div class="col-6">
+    <div class="col-5">
       <input
         type="number"
         inputmode="numeric"
@@ -24,11 +24,11 @@
         [(ngModel)]="income"
       />
     </div>
-    <div class="col-3">
+    <div class="col-4">
       <button type="submit" class="btn btn-primary">Calculate</button>
     </div>
   </form>
 </section>
 <section class="d-flex justify-content-center mt-5">
-  <app-tax-regime-table style="width: 60%" [taxRegime]="taxRegime"></app-tax-regime-table>
+  <app-tax-regime-table style="width: 90%" [taxRegime]="taxRegime"></app-tax-regime-table>
 </section>
