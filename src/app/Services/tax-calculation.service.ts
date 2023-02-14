@@ -42,7 +42,10 @@ export class TaxCalculationService {
         break;
       } else {
         let diff = currentSlab.range.upperBound - currentSlab.range.lowerBound;
-        tax += (diff * currentSlab.rate) / 100.0;
+        tax +=
+          ((diff > remainingIncome ? remainingIncome : diff) *
+            currentSlab.rate) /
+          100.0;
         slabIndex++;
         remainingIncome -= diff;
       }

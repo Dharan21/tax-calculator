@@ -23,6 +23,6 @@ export class AppComponent {
   onSubmit() {
     console.log(this.income);
     var result = this.taxCalculationService.calculateTax(this.income);
-    alert(result.taxValue);
+    alert("Tax: " + result.taxValue);
   }
 }
