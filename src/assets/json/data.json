@@ -1,0 +1,57 @@
+[
+  {
+    "introducedYear": 2022,
+    "standardDeduction": 50000,
+    "slabs": [
+        {
+            "range": {
+                "lowerBound": 0,
+                "upperBound": 250000
+            },
+            "rate": 0
+        },
+        {
+            "range": {
+                "lowerBound": 250000,
+                "upperBound": 500000
+            },
+            "rate": 5
+        },
+        {
+            "range": {
+                "lowerBound": 500000,
+                "upperBound": 750000
+            },
+            "rate": 10
+        },
+        {
+            "range": {
+                "lowerBound": 750000,
+                "upperBound": 1000000
+            },
+            "rate": 15
+        },
+        {
+            "range": {
+                "lowerBound": 1000000,
+                "upperBound": 1250000
+            },
+            "rate": 20
+        },
+        {
+            "range": {
+                "lowerBound": 1250000,
+                "upperBound": 1500000
+            },
+            "rate": 25
+        },
+        {
+            "range": {
+                "lowerBound": 1500000,
+                "upperBound": -1
+            },
+            "rate": 30
+        }
+    ]
+  }
+]

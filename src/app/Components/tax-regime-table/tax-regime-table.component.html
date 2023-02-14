@@ -1,0 +1,32 @@
+<table class="table table-striped-columns" *ngIf="taxRegime">
+  <thead>
+    <tr>
+      <td>Income Tax Slab</td>
+      <td>Income Tax Rate</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let slab of taxRegime.slabs">
+      <td>
+        <ng-container
+          *ngIf="
+            slab.range.lowerBound == 0 || slab.range.upperBound == -1;
+            else Range
+          "
+        >
+          <ng-container *ngIf="slab.range.lowerBound == 0">
+            Up to {{ slab.range.upperBound | currency: "INR" }}
+          </ng-container>
+          <ng-container *ngIf="slab.range.upperBound == -1">
+            Above {{ slab.range.lowerBound | currency: "INR" }}
+          </ng-container>
+        </ng-container>
+        <ng-template #Range>
+          {{ slab.range.lowerBound | currency: "INR" }} -
+          {{ slab.range.upperBound | currency: "INR" }}
+        </ng-template>
+      </td>
+      <td>{{ slab.rate }}%</td>
+    </tr>
+  </tbody>
+</table>
