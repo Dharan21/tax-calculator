@@ -1,7 +1,7 @@
 import { Slabs } from "./slabs.model";
 
 export interface TaxRegime {
-    introducedYear: number;
+    name: string;
     standardDeduction: number;
     slabs: Slabs[];
     amount?: number; 

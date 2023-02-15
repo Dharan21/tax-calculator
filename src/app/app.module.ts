@@ -5,11 +5,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { TaxRegimeTableComponent } from './Components/tax-regime-table/tax-regime-table.component';
+import { AmountInLakhsCurrencyPipe } from './Pipes/amount-in-lakhs.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TaxRegimeTableComponent
+    TaxRegimeTableComponent,
+    AmountInLakhsCurrencyPipe
   ],
   imports: [
     BrowserModule,

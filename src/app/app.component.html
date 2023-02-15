@@ -10,25 +10,54 @@
     #f="ngForm"
     (submit)="onSubmit()"
   >
-    <div class="col-3">
-      <label for="income">Yearly Income</label>
+    <div class="row justify-content-center">
+      <div class="col-6">
+        <label for="income">Yearly Income</label>
+        <input
+          type="number"
+          inputmode="numeric"
+          class="form-control"
+          id="income"
+          placeholder="Ex. 500000"
+          name="income"
+          [(ngModel)]="income"
+        />
+      </div>
+      <div class="col-6" *ngIf="taxRegimes">
+        <label for="regime">Tax regime</label>
+        <select
+          class="form-select"
+          name="tax-regime"
+          [(ngModel)]="selectedRegimeName"
+          (ngModelChange)="onTaxRegimeSelect()"
+        >
+          <option disabled>Select tax regime</option>
+          <option [value]="regime.name" *ngFor="let regime of taxRegimes">
+            {{ regime.name }}
+          </option>
+        </select>
+      </div>
     </div>
-    <div class="col-5">
-      <input
-        type="number"
-        inputmode="numeric"
-        class="form-control"
-        id="income"
-        placeholder="Ex. 500000"
-        name="income"
-        [(ngModel)]="income"
-      />
-    </div>
-    <div class="col-4">
-      <button type="submit" class="btn btn-primary">Calculate</button>
+    <div class="row justify-content-center mt-3">
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary"
+        [disabled]="!taxRegime || !income">Calculate</button>
+        <button
+          type="button"
+          class="btn btn-secondary ms-2"
+          (click)="onClear()"
+        >
+          Clear
+        </button>
+      </div>
     </div>
   </form>
 </section>
 <section class="d-flex justify-content-center mt-5">
-  <app-tax-regime-table style="width: 90%" [taxRegime]="taxRegime"></app-tax-regime-table>
+  <app-tax-regime-table
+    style="width: 95%"
+    [taxRegime]="taxRegime"
+    [displayCalculations]="displayCalculations"
+    [yearlyIncome]="income ?? 0"
+  ></app-tax-regime-table>
 </section>
