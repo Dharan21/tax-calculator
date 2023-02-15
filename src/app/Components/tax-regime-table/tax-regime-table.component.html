@@ -3,10 +3,26 @@
     <tr>
       <td>Income Tax Slab</td>
       <td>Income Tax Rate</td>
+      <td *ngIf="displayCalculations">
+        <span>Your Share</span>
+        (
+        <span>
+          <span title="Yearly Income">{{ yearlyIncome }}</span>
+          -
+          <span title="Standard deducation">
+            {{ taxRegime.standardDeduction }}
+          </span>
+          =
+          <span title="Taxable income">
+            {{ yearlyIncome - taxRegime.standardDeduction }}
+          </span>
+        </span>
+        )
+      </td>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let slab of taxRegime.slabs">
+    <tr *ngFor="let slab of taxRegime.slabs; let i = index">
       <td>
         <ng-container
           *ngIf="
@@ -15,18 +31,47 @@
           "
         >
           <ng-container *ngIf="slab.range.lowerBound == 0">
-            Up to {{ slab.range.upperBound | currency: "INR" }}
+            Up to {{ slab.range.upperBound | amountInLakhs }}
           </ng-container>
           <ng-container *ngIf="slab.range.upperBound == -1">
-            Above {{ slab.range.lowerBound | currency: "INR" }}
+            Above {{ slab.range.lowerBound | amountInLakhs }}
           </ng-container>
         </ng-container>
         <ng-template #Range>
-          {{ slab.range.lowerBound | currency: "INR" }} -
-          {{ slab.range.upperBound | currency: "INR" }}
+          {{ slab.range.lowerBound | amountInLakhs }} -
+          {{ slab.range.upperBound | amountInLakhs }}
         </ng-template>
       </td>
       <td>{{ slab.rate }}%</td>
+      <td *ngIf="displayCalculations && ((slab.amount ?? 0) > 0 || i == 0)">
+        <span>{{ slab.amount }}</span>
+        (
+        <span>
+          <span>{{ slab.slabStartIncome }}</span>
+          -
+          <span title="Taxable amount for slab {{ i + 1 }}">
+            {{ (slab.slabStartIncome ?? 0) - (slab.ramainingIncome ?? 0) }}
+          </span>
+          =
+          <span title="Remaining income">
+            {{ slab.ramainingIncome }}
+          </span>
+        </span>
+        ) (
+        <span>
+          <span title="Taxable income for slab {{ i + 1 }}">
+            {{ (slab.slabStartIncome ?? 0) - (slab.ramainingIncome ?? 0) }}
+          </span>
+          %
+          <span title="Slab rate">{{ slab.rate }}</span> =
+          <span title="Tax amout for slab {{ i + 1 }}">{{ slab.amount }}</span>
+        </span>
+        )
+      </td>
+    </tr>
+    <tr *ngIf="displayCalculations">
+      <td colspan="2">Total Tax:</td>
+      <td title="Income Tax" style="background-color: red; font-weight: 900;">{{ taxRegime.amount }}</td>
     </tr>
   </tbody>
 </table>

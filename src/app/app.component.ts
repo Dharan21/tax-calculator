@@ -11,8 +11,9 @@ import { TaxCalculationService } from './Services/tax-calculation.service';
 })
 export class AppComponent {
   title = 'tax-calculator';
-  income!: number;
+  income!: number | null;
   taxRegime!: TaxRegime;
+  displayCalculations = false;
 
   constructor(private taxCalculationService: TaxCalculationService) {
     this.taxCalculationService.taxRegimeSub.subscribe(
@@ -20,9 +21,16 @@ export class AppComponent {
     );
   }
 
+  onClear() {
+    this.income = null;
+    this.displayCalculations = false;
+  }
+
   onSubmit() {
     console.log(this.income);
-    var result = this.taxCalculationService.calculateTax(this.income);
-    alert("Tax: " + result.taxValue);
+    let result = this.taxCalculationService.calculateTax(this.income ?? 0);
+    this.taxRegime = result.taxRegime;
+    this.displayCalculations = true;
+    // alert("Tax: " + result.taxValue);
   }
 }

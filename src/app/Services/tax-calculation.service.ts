@@ -37,20 +37,28 @@ export class TaxCalculationService {
     let slabMaxIndex = slabs.length;
     while (remainingIncome > 0 && slabMaxIndex > slabIndex) {
       let currentSlab = slabs[slabIndex];
+      currentSlab.slabStartIncome = remainingIncome;
       if (currentSlab.range.upperBound == -1) {
-        tax += (remainingIncome * currentSlab.rate) / 100.0;
+        let slabDeductions = (remainingIncome * currentSlab.rate) / 100.0;
+        currentSlab.amount = slabDeductions;
+        tax += slabDeductions;
+        currentSlab.ramainingIncome = 0;
         break;
       } else {
         let diff = currentSlab.range.upperBound - currentSlab.range.lowerBound;
-        tax +=
+        let slabDeductions =
           ((diff > remainingIncome ? remainingIncome : diff) *
             currentSlab.rate) /
           100.0;
+        currentSlab.amount = slabDeductions;
+        tax += slabDeductions;
         slabIndex++;
         remainingIncome -= diff;
+        currentSlab.ramainingIncome = remainingIncome > 0 ? remainingIncome : 0;
       }
     }
     incomeTax.taxValue = tax;
+    incomeTax.taxRegime.amount = tax;
     return incomeTax;
   }
 }

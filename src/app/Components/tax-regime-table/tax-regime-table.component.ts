@@ -8,5 +8,7 @@ import { TaxRegime } from "src/app/Models/tax-regime.model";
 })
 export class TaxRegimeTableComponent {
     @Input() taxRegime!: TaxRegime;
+    @Input() yearlyIncome!: number;
+    @Input() displayCalculations: boolean = false;
 
 }
