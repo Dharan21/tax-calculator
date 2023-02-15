@@ -1,57 +1,146 @@
 [
   {
-    "introducedYear": 2022,
+    "name": "2022-23 Old",
     "standardDeduction": 50000,
     "slabs": [
-        {
-            "range": {
-                "lowerBound": 0,
-                "upperBound": 250000
-            },
-            "rate": 0
+      {
+        "range": {
+          "lowerBound": 0,
+          "upperBound": 250000
         },
-        {
-            "range": {
-                "lowerBound": 250000,
-                "upperBound": 500000
-            },
-            "rate": 5
+        "rate": 0
+      },
+      {
+        "range": {
+          "lowerBound": 250000,
+          "upperBound": 500000
         },
-        {
-            "range": {
-                "lowerBound": 500000,
-                "upperBound": 750000
-            },
-            "rate": 10
+        "rate": 5
+      },
+      {
+        "range": {
+          "lowerBound": 500000,
+          "upperBound": 750000
         },
-        {
-            "range": {
-                "lowerBound": 750000,
-                "upperBound": 1000000
-            },
-            "rate": 15
+        "rate": 20
+      },
+      {
+        "range": {
+          "lowerBound": 750000,
+          "upperBound": 1000000
         },
-        {
-            "range": {
-                "lowerBound": 1000000,
-                "upperBound": 1250000
-            },
-            "rate": 20
+        "rate": 20
+      },
+      {
+        "range": {
+          "lowerBound": 1000000,
+          "upperBound": -1
         },
-        {
-            "range": {
-                "lowerBound": 1250000,
-                "upperBound": 1500000
-            },
-            "rate": 25
+        "rate": 30
+      }
+    ]
+  },
+  {
+    "name": "2022-23 New",
+    "standardDeduction": 50000,
+    "slabs": [
+      {
+        "range": {
+          "lowerBound": 0,
+          "upperBound": 250000
         },
-        {
-            "range": {
-                "lowerBound": 1500000,
-                "upperBound": -1
-            },
-            "rate": 30
-        }
+        "rate": 0
+      },
+      {
+        "range": {
+          "lowerBound": 250000,
+          "upperBound": 500000
+        },
+        "rate": 5
+      },
+      {
+        "range": {
+          "lowerBound": 500000,
+          "upperBound": 750000
+        },
+        "rate": 10
+      },
+      {
+        "range": {
+          "lowerBound": 750000,
+          "upperBound": 1000000
+        },
+        "rate": 15
+      },
+      {
+        "range": {
+          "lowerBound": 1000000,
+          "upperBound": 1250000
+        },
+        "rate": 20
+      },
+      {
+        "range": {
+          "lowerBound": 1250000,
+          "upperBound": 1500000
+        },
+        "rate": 25
+      },
+      {
+        "range": {
+          "lowerBound": 1500000,
+          "upperBound": -1
+        },
+        "rate": 30
+      }
+    ]
+  },
+  {
+    "name": "2023-24",
+    "standardDeduction": 50000,
+    "slabs": [
+      {
+        "range": {
+          "lowerBound": 0,
+          "upperBound": 300000
+        },
+        "rate": 0
+      },
+      {
+        "range": {
+          "lowerBound": 300000,
+          "upperBound": 600000
+        },
+        "rate": 5
+      },
+      {
+        "range": {
+          "lowerBound": 600000,
+          "upperBound": 900000
+        },
+        "rate": 10
+      },
+      {
+        "range": {
+          "lowerBound": 900000,
+          "upperBound": 1200000
+        },
+        "rate": 15
+      },
+      {
+        "range": {
+          "lowerBound": 1200000,
+          "upperBound": 1500000
+        },
+        "rate": 20
+      },
+      {
+        "range": {
+          "lowerBound": 1500000,
+          "upperBound": -1
+        },
+        "rate": 30
+      }
     ]
   }
 ]

@@ -8,23 +8,21 @@ import { TaxRegime } from '../Models/tax-regime.model';
 @Injectable({ providedIn: 'root' })
 export class TaxCalculationService {
   url = environment.url;
-  private taxRegime?: TaxRegime;
   taxRegimes: TaxRegime[] = [];
-  taxRegimeSub = new Subject<TaxRegime>();
+  taxRegimeSub = new Subject<TaxRegime[]>();
 
   constructor(private httpClient: HttpClient) {
     this.httpClient.get<TaxRegime[]>(this.url).subscribe((data) => {
       this.taxRegimes = data;
-      this.taxRegime = this.taxRegimes[0];
-      this.taxRegimeSub.next({ ...this.taxRegime });
+      this.taxRegimeSub.next(this.taxRegimes);
     });
   }
 
-  calculateTax(yearlyIncome: number): IncomeTax {
+  calculateTax(yearlyIncome: number, selectedTaxRegime: TaxRegime): IncomeTax {
     yearlyIncome = +yearlyIncome;
     let incomeTax: IncomeTax = {
       yearlyIncome: yearlyIncome,
-      taxRegime: this.taxRegime as TaxRegime,
+      taxRegime: selectedTaxRegime,
       taxValue: 0,
     };
     if (!incomeTax.yearlyIncome) {

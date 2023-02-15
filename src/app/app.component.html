@@ -11,7 +11,7 @@
     (submit)="onSubmit()"
   >
     <div class="row justify-content-center">
-      <div class="col-12">
+      <div class="col-6">
         <label for="income">Yearly Income</label>
         <input
           type="number"
@@ -23,11 +23,32 @@
           [(ngModel)]="income"
         />
       </div>
+      <div class="col-6" *ngIf="taxRegimes">
+        <label for="regime">Tax regime</label>
+        <select
+          class="form-select"
+          name="tax-regime"
+          [(ngModel)]="selectedRegimeName"
+          (ngModelChange)="onTaxRegimeSelect()"
+        >
+          <option disabled>Select tax regime</option>
+          <option [value]="regime.name" *ngFor="let regime of taxRegimes">
+            {{ regime.name }}
+          </option>
+        </select>
+      </div>
     </div>
     <div class="row justify-content-center mt-3">
       <div class="col-12">
-        <button type="submit" class="btn btn-primary">Calculate</button>
-        <button type="button" class="btn btn-secondary ms-2" (click)="onClear()">Clear</button>
+        <button type="submit" class="btn btn-primary"
+        [disabled]="!taxRegime || !income">Calculate</button>
+        <button
+          type="button"
+          class="btn btn-secondary ms-2"
+          (click)="onClear()"
+        >
+          Clear
+        </button>
       </div>
     </div>
   </form>

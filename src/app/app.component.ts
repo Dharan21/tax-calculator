@@ -11,26 +11,34 @@ import { TaxCalculationService } from './Services/tax-calculation.service';
 })
 export class AppComponent {
   title = 'tax-calculator';
-  income!: number | null;
+  taxRegimes: TaxRegime[] = [];
+  income?: number;
   taxRegime!: TaxRegime;
+  selectedRegimeName?: string;
   displayCalculations = false;
 
   constructor(private taxCalculationService: TaxCalculationService) {
     this.taxCalculationService.taxRegimeSub.subscribe(
-      (data) => (this.taxRegime = data)
+      (data) => (this.taxRegimes = data)
     );
   }
 
   onClear() {
-    this.income = null;
+    this.income = undefined;
     this.displayCalculations = false;
+  }
+
+  onTaxRegimeSelect() {
+    this.taxRegime = this.taxRegimes.find(
+      (regime) => regime.name == this.selectedRegimeName
+    ) as TaxRegime;
+    if (this.income) this.onSubmit();
   }
 
   onSubmit() {
     console.log(this.income);
-    let result = this.taxCalculationService.calculateTax(this.income ?? 0);
+    let result = this.taxCalculationService.calculateTax(this.income ?? 0, this.taxRegime);
     this.taxRegime = result.taxRegime;
     this.displayCalculations = true;
-    // alert("Tax: " + result.taxValue);
   }
 }
